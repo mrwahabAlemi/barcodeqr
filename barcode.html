@@ -14,9 +14,6 @@
 	<script src="https://fix.finty.co/barcode/qrcode.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/jsbarcode@latest/dist/JsBarcode.all.min.js"> </script>
 
-
-	<!--[if lt IE 9]><script src="/media/jui/js/html5.js?a0ae01944cbd0840c414e04c7a8681c4"></script><![endif]-->
-
 </head>
 
 <body class="contentpane component toolbar-active" cz-shortcut-listen="true">
@@ -33,10 +30,28 @@
 					<div class="btn-wrapper" id="toolbar-save">
 						<button class="btn btn-small button-apply btn-success"> <span class="icon-apply icon-white"
 								aria-hidden="true"></span>ذخیره</button>
-								<button id="btn_print" class="btn btn-meduim button-apply btn-info"> <span
-									class="icon-print icon-white" aria-hidden="true"></span>چاپ</button>
+						<button id="btn_print" class="btn btn-meduim button-apply btn-info"> <span
+								class="icon-print icon-white" aria-hidden="true"></span>چاپ</button>
 					</div>
 				</div>
+			</div>
+			<div class="toolbar-tool barcode-count" data-change-function="changeBarcodeCount">
+				<div class="tool-title">
+					نوع لیبل
+				</div>
+				<div class="tool-body">
+
+					<div class="radio-button">
+						<input type="radio" id="option1" name="options" value="1">
+						<label for="option1">کیوارکد</label>
+					</div>
+
+					<div class="radio-button">
+						<input type="radio" id="option2" name="options" value="2">
+						<label for="option2">بارکد</label>
+					</div>
+				</div>
+				<hr style="margin-bottom: 5px;padding-bottom: 5px;" />
 			</div>
 
 			<div class="toolbar-tool barcode-count" data-change-function="changeBarcodeCount">
@@ -260,27 +275,26 @@
 
 			<div class="inner" style="padding-top:5px">
 				<strong>
-					<span id="shelf_number" class="shnumbers" ></span>
+					<span id="shelf_number" class="shnumbers"></span>
 				</strong>
 
 			</div>
 		</div>
 
 	</div>
-	<div id="barcode_area" class="print_area center">
+	<div id="barcode_area" style="display: none;" class="print_area center">
 
 		<div class="bparent">
 
 			<div class="inner">
 
 				<img class="code128" />
-				<div id="qrcodecontainer" class="qrcnt">
-				</div>
+
 			</div>
 
 			<div class="inner" style="padding-top:5px">
 				<strong>
-					<span id="shelf_number" class="shnumbers" ></span>
+					<span id="shelf_number" class="shnumbers"></span>
 				</strong>
 
 			</div>
@@ -308,7 +322,7 @@
 				if (typeof window.rppbarcodeoptions === "undefined")
 					return;
 
-			  ChangeFont_size();
+				ChangeFont_size();
 
 			},
 			'changeBarcodePrintTopOffset': function () {
@@ -519,6 +533,31 @@
 			});
 
 			ChangeFont_size();
+
+			const radioButtons = document.querySelectorAll('input[name="options"]');
+
+			// Add event listener to each radio button
+			radioButtons.forEach((radioButton) => {
+				radioButton.addEventListener('change', (event) => {
+					// Get the value of the selected radio button
+					const selectedValue = event.target.value;
+
+					if (selectedValue == 1) {
+					
+						$('#qrcode_area').hide();
+
+						$("#barcode_area").show();
+					}
+					else
+					{
+						$('#qrcode_area').show();
+
+                         $("#barcode_area").hide();
+					}
+
+				});
+			});
+
 
 			$('#txtlink').on('input', function (e) {
 
@@ -968,6 +1007,9 @@
 
 			removeAttr(".code128", "style");
 		}
+
+
+
 	</script>
 
 
