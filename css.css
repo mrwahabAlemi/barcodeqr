@@ -69,7 +69,7 @@
 	    	;
 	    }
 
-	    .printarea {
+	    .print_area {
 	    	display: flex;
 	    	justify-content: flex-start;
 	    	flex-direction: row;
@@ -78,7 +78,7 @@
 	    	direction: ltr;
 	    }
 
-	    .printarea>div {
+	    .print_area>div {
 	    	display: inline-block !important;
 	    	direction: ltr;
 	    	overflow: hidden;

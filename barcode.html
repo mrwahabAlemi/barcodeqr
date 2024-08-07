@@ -247,7 +247,27 @@
 		</div>
 	</div>
 
-	<div id="printarea" class="printarea center">
+	<div id="qrcode_area" class="print_area center">
+
+		<div class="bparent">
+
+			<div class="inner">
+
+				<img class="code128" />
+				<div id="qrcodecontainer" class="qrcnt">
+				</div>
+			</div>
+
+			<div class="inner" style="padding-top:5px">
+				<strong>
+					<span id="shelf_number" class="shnumbers" ></span>
+				</strong>
+
+			</div>
+		</div>
+
+	</div>
+	<div id="barcode_area" class="print_area center">
 
 		<div class="bparent">
 
@@ -792,7 +812,7 @@
 			if (window.rppbarcodeoptions.bcbenable && window.rppbarcodeoptions.bcbside == "out")
 				cwidth += (window.rppbarcodeoptions.bcbsize * window.rppbarcodeoptions.bcols * 2);
 
-			jQuery('.printarea').css({
+			jQuery('.print_area').css({
 				width: cwidth + "mm",
 				margin: window.rppbarcodeoptions.bcto + 'mm auto 0',
 				gap: window.rppbarcodeoptions.bcrg + 'mm ' + window.rppbarcodeoptions.bccg + 'mm',
@@ -811,7 +831,7 @@
 			if (window.rppbarcodeoptions.bcbenable && window.rppbarcodeoptions.bcbside == "in")
 				styleString += " box-sizing: border-box;";
 
-			jQuery('.printarea > *').attr("style", styleString);
+			jQuery('.print_area > *').attr("style", styleString);
 
 			UpdatePrinterRoll();
 		}
@@ -860,12 +880,12 @@
 			if (typeof window.rppbarcodeoptions === "undefined")
 				return;
 
-			var barcodeHtml = jQuery('.printarea > *').first()[0].outerHTML;
-			jQuery('.printarea').html("");
+			var barcodeHtml = jQuery('.print_area > *').first()[0].outerHTML;
+			jQuery('.print_area').html("");
 
 
 			for (var i = 0; i < window.rppbarcodeoptions.bcount; i++) {
-				jQuery('.printarea').append(barcodeHtml);
+				jQuery('.print_area').append(barcodeHtml);
 			}
 
 			UpdatePrinterRoll();
@@ -886,7 +906,7 @@
 
 		function UpdatePrinterRoll() {
 
-			var element = document.querySelector('#printarea');
+			var element = document.querySelector('#qrcode_area');
 
 			var width = element.style.width.replace('mm', '');
 
