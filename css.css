@@ -30,10 +30,12 @@
 	    	display: none;
 	    }
 
-	    #txtvalue {
+	    #txtlink {
 	    	width: 15%;
-	    	left: 300px;
+	    	left: 100px;
 	    	position: fixed;
+			direction: ltr;
+			text-align: left;
 	    }
 
 	    @media print {
