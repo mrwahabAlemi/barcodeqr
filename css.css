@@ -1,0 +1,323 @@
+	    *{
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+		}
+		
+		 button {
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+		  }
+
+		#qrcodecontainer {
+	    	max-width: 45mm;
+	    	max-height: 45mm;
+	    	margin: 0 auto;
+	    }
+
+	    #qrcodecontainer img {
+	    	max-width: 100%;
+	    	margin: 0 auto;
+	    }
+
+	    .inner strong {
+	    	font-size: large;
+	    	color: #000;
+	    }
+
+	    .bparent {
+	    	margin: 0 auto;
+	    }
+
+	    .code128 {
+	    	display: none;
+	    }
+
+	    #txtvalue {
+	    	width: 15%;
+	    	left: 300px;
+	    	position: fixed;
+	    }
+
+	    @media print {
+	    	@page {
+	    		/*size: 1.77in 0.59in;*/
+	    		margin: 0;
+	    		padding: 0;
+	    	}
+
+	    	html,
+	    	body {
+	    		height: 100%;
+	    		width: 100%;
+	    	}
+
+	    	.no-print,
+	    	.no-print * {
+	    		display: none !important;
+	    	}
+
+
+	    	.contentpane {
+	    		padding: 0;
+	    	}
+
+	    	.barcode-toolbar {
+	    		display: none;
+	    	}
+
+	    	img {
+	    		margin: 0 auto;
+	    	}
+
+	    	;
+	    }
+
+	    .printarea {
+	    	display: flex;
+	    	justify-content: flex-start;
+	    	flex-direction: row;
+	    	flex-wrap: wrap;
+	    	align-content: flex-start;
+	    	direction: ltr;
+	    }
+
+	    .printarea>div {
+	    	display: inline-block !important;
+	    	direction: ltr;
+	    	overflow: hidden;
+	    	position: relative;
+	    }
+
+	    input[type="number"] {
+	    	-webkit-appearance: textfield;
+	    	-moz-appearance: textfield;
+	    	appearance: textfield;
+	    }
+
+	    input[type=number]::-webkit-inner-spin-button,
+	    input[type=number]::-webkit-outer-spin-button {
+	    	-webkit-appearance: none;
+	    }
+
+	    .number-input {
+	    	border: 2px solid #ddd;
+	    	display: inline-flex;
+	    }
+
+	    .number-input,
+	    .number-input * {
+	    	box-sizing: border-box;
+	    }
+
+	    .number-input button {
+	    	outline: none;
+	    	-webkit-appearance: none;
+	    	background-color: transparent;
+	    	border: none;
+	    	align-items: center;
+	    	justify-content: center;
+	    	width: 1.5rem;
+	    	height: 1.5rem;
+	    	cursor: pointer;
+	    	margin: 0;
+	    	position: relative;
+	    	font-size: 1rem;
+	    }
+
+	    .number-input input[type=number] {
+
+	    	max-width: 3rem;
+	    	padding: .5rem;
+	    	border: solid #ddd;
+	    	border-width: 0 2px;
+	    	font-size: 1.2rem;
+	    	height: 1.5rem;
+	    	font-weight: bold;
+	    	text-align: center;
+	    	margin: 0;
+	    }
+
+	    #barcode-border-type-list {
+	    	width: 6rem;
+	    	margin-bottom: 0px;
+	    }
+
+	    /*
+	*
+	* IOS switch start
+	* 
+	*/
+	    .form-switch {
+	    	display: inline-block;
+	    	cursor: pointer;
+	    	-webkit-tap-highlight-color: transparent;
+	    }
+
+	    .form-switch i {
+	    	position: relative;
+	    	display: inline-block;
+	    	margin-right: .5rem;
+	    	width: 46px;
+	    	height: 26px;
+	    	background-color: #e6e6e6;
+	    	border-radius: 23px;
+	    	vertical-align: text-bottom;
+	    	transition: all 0.3s linear;
+	    }
+
+	    .form-switch i::before {
+	    	content: "";
+	    	position: absolute;
+	    	left: 0;
+	    	width: 42px;
+	    	height: 22px;
+	    	background-color: #fff;
+	    	border-radius: 11px;
+	    	transform: translate3d(2px, 2px, 0) scale3d(1, 1, 1);
+	    	transition: all 0.25s linear;
+	    }
+
+	    .form-switch i::after {
+	    	content: "";
+	    	position: absolute;
+	    	left: 0;
+	    	width: 22px;
+	    	height: 22px;
+	    	background-color: #fff;
+	    	border-radius: 11px;
+	    	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.24);
+	    	transform: translate3d(2px, 2px, 0);
+	    	transition: all 0.2s ease-in-out;
+	    }
+
+	    .form-switch:active i::after {
+	    	width: 28px;
+	    	transform: translate3d(2px, 2px, 0);
+	    }
+
+	    .form-switch:active input:checked+i::after {
+	    	transform: translate3d(16px, 2px, 0);
+	    }
+
+	    .form-switch input {
+	    	display: none;
+	    }
+
+	    .form-switch input:checked+i {
+	    	background-color: #4BD763;
+	    }
+
+	    .form-switch input:checked+i::before {
+	    	transform: translate3d(18px, 2px, 0) scale3d(0, 0, 0);
+	    }
+
+	    .form-switch input:checked+i::after {
+	    	transform: translate3d(22px, 2px, 0);
+	    }
+
+	    /*
+	*
+	* IOS switch end 
+	* 
+	*/
+
+
+	    /*
+	*
+	* toolbar start 
+	* 
+	*/
+	    .toolbar-title {
+	    	text-align: center;
+	    	background-color: rgba(0, 0, 0, 0.2);
+	    	padding: 0.5rem 0;
+	    	margin-top: 0;
+
+	    }
+
+	    .barcode-toolbar-toogle {
+	    	background-color: #eee;
+	    	color: #333;
+	    	position: fixed;
+	    	top: 8px;
+	    	width: 48px;
+	    	height: 48px;
+	    	line-height: 48px;
+	    	right: 0;
+	    	text-align: center;
+	    	font-size: 16px;
+	    	z-index: 999999;
+	    }
+
+	    body.toolbar-active .barcode-toolbar-toogle {
+	    	background-color: #333;
+	    	color: #eee;
+	    	right: 0;
+
+	    }
+
+	    label {
+	    	margin-bottom: 3px;
+	    }
+
+	    .barcode-toolbar {
+	    	background-color: #eee;
+	    	position: fixed;
+	    	top: 0;
+	    	height: 100%;
+	    	right: calc(100%);
+	    	padding: 8px 0;
+	    	overflow: auto;
+	    	padding-top: 0px;
+	    	left: 0;
+	    }
+
+	    body.toolbar-active .barcode-toolbar {
+	    	right: 0px;
+	    	width: 250px;
+	    	overflow-y: auto;
+	    }
+
+	    /*@media only screen and (max-width:1024px) 
+	{
+	    body.toolbar-active .barcode-toolbar
+	    {
+	        overflow-y:scroll;
+	    }
+	}*/
+
+	    .toolbar-tool {
+	    	padding: 0 8px 8px;
+	    	display: block;
+	    }
+
+	    .toolbar-tool .tool-title {
+	    	margin-bottom: 8px;
+	    	text-align: right;
+	    }
+
+	    .toolbar-tool .tool-body {
+	    	text-align: center;
+	    }
+
+	    .savesettingloader {
+	    	position: fixed;
+	    	top: 0;
+	    	left: 0;
+	    	width: 100%;
+	    	height: 100%;
+	    	background-color: rgba(255, 255, 255, 0.7);
+	    	z-index: 999999;
+	    	text-align: center;
+	    	display: flex;
+	    	justify-content: space-around;
+	    	align-items: center;
+
+	    }
+
+	    .savesettingloader span {
+	    	font-weight: bold;
+	    	font-size: 16px;
+	    }
+
+	    a {
+	    	color: #92278f;
+	    }

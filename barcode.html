@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<!-- saved from url=(0144)https://arashfakhrsrc.com/administrator/index.php?option=com_rppfixingcenter&view=receipt&layout=barcodeprint&tmpl=component&id=343&_=1655183719 -->
+<html lang="en-us" dir="rtl">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<title>چاپ کیوآرکد</title>
+	<link href="style.min.css" rel="stylesheet">
+	<link href="template-rtl.css?v=1.1.2" rel="stylesheet">
+	<link href="css.css" rel="stylesheet">
+
+	<script src="https://fix.finty.ir/barcode/jquery.min.js"></script>
+	<script src="https://fix.finty.co/barcode/qrcode.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jsbarcode@latest/dist/JsBarcode.all.min.js"> </script>
+
+	<!--[if lt IE 9]><script src="/media/jui/js/html5.js?a0ae01944cbd0840c414e04c7a8681c4"></script><![endif]-->
+
+</head>
+
+<body class="contentpane component toolbar-active" cz-shortcut-listen="true">
+
+	<div id="system-message-container" class="no-print">
+		<input id="txtvalue" placholder="لینک را وارد کنید" style="text-align: left;direction: ltr;" value="">
+	</div>
+
+	<div id="barcodetools" class="barcode-toolbar no-print">
+		<div class="continer">
+			<h4 class="toolbar-title"> تنظیمات </h4>
+			<div class="toolbar-tool save-barcode-settings" data-change-function="saveBorderSettings">
+				<div class="tool-body">
+					<div class="btn-wrapper" id="toolbar-save">
+						<button class="btn btn-small button-apply btn-success"> <span class="icon-apply icon-white"
+								aria-hidden="true"></span>ذخیره</button>
+					</div>
+				</div>
+			</div>
+			<div class="toolbar-tool">
+				<div class="tool-body">
+					<div class="btn-wrapper" id="toolbar-save">
+						<button id="btn_print" class="btn btn-meduim button-apply btn-info"> <span
+								class="icon-print icon-white" aria-hidden="true"></span>چاپ</button>
+					</div>
+				</div>
+			</div>
+			<div class="toolbar-tool barcode-count" data-change-function="changeBarcodeCount">
+				<div class="tool-title">
+					تعداد کیوآرکد
+				</div>
+				<div class="tool-body">
+					<div class="number-input">
+						<button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+							class="minus">-</button>
+						<input id="bcount" min="1" max="1000" value="1" type="number">
+						<button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+							class="plus">+</button>
+					</div>
+				</div>
+			</div>
+			<div class="toolbar-tool barcode-continer-top-offset" data-change-function="changeBarcodePrintTopOffset">
+				<div class="tool-title">
+					فاصله از بالا در هنگام چاپ (mm)
+				</div>
+				<div class="tool-body">
+					<div class="number-input">
+						<button id="bcto_stepdown"
+							onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+							class="minus">-</button>
+
+						<input id="bcto" min="0" value="1" type="number">
+						<button id="bcto_stepup" onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+							class="plus">+</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="toolbar-tool barcode-width" data-change-function="changeBarcodeWidth">
+				<div class="tool-title">
+					عرض کیوآرکد
+				</div>
+				<div class="tool-body">
+					<div class="number-input">
+						<button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+							class="minus">-</button>
+						<input id="bw" min="25" value="25" type="number">
+						<button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+							class="plus">+</button>
+					</div>
+				</div>
+			</div>
+			<div class="toolbar-tool barcode-height" data-change-function="changeBarcodeHeight">
+				<div class="tool-title">
+					ارتفاع کیوآرکد
+				</div>
+				<div class="tool-body">
+					<div class="number-input">
+						<button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+							class="minus">-</button>
+						<input id="bh" min="25" value="25" type="number">
+						<button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+							class="plus">+</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="toolbar-tool barcode-columns" data-change-function="changeBarcodeColumns">
+				<div class="tool-title">
+					تعداد ستوان ها
+				</div>
+				<div class="tool-body">
+					<div class="number-input">
+						<button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+							class="minus">-</button>
+						<input id="bcols" min="1" max="15" value="1" type="number">
+						<button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+							class="plus">+</button>
+					</div>
+				</div>
+			</div>
+			<div class="toolbar-tool barcode-container-column-gap"
+				data-change-function="changeBarcodeContainerColumnGap">
+				<div class="tool-title">
+					فاصله بین ستون ها (mm)
+				</div>
+				<div class="tool-body">
+					<div class="number-input">
+						<button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+							class="minus">-</button>
+						<input id="bccg" min="1" max="50" value="15" type="number">
+						<button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+							class="plus">+</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="toolbar-tool barcode-continer-width" data-change-function="changeBarcodeContainerWidth">
+				<div class="tool-title">
+					عرض برچسب (mm)
+				</div>
+				<div class="tool-body">
+					<div class="number-input">
+						<button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+							class="minus">-</button>
+						<input id="bcw" min="1" value="45" type="number">
+						<button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+							class="plus">+</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="toolbar-tool barcode-continer-height" data-change-function="changeBarcodeContainerHeight">
+				<div class="tool-title">
+					ارتفاع برچسب (mm)
+				</div>
+				<div class="tool-body">
+					<div class="number-input">
+						<button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+							class="minus">-</button>
+						<input id="bch" min="1" value="45" type="number">
+						<button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+							class="plus">+</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="toolbar-tool barcode-container-row-gap" data-change-function="changeBarcodeContainerRowGap">
+				<div class="tool-title">
+					فاصله بین ردیف ها (mm)
+				</div>
+				<div class="tool-body">
+					<div class="number-input">
+						<button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+							class="minus">-</button>
+						<input id="bcrg" min="0" max="50" value="0" type="number">
+						<button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+							class="plus">+</button>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="toolbar-tool barcode-border" data-change-function="toggleBarcodeContainerBorder">
+				<div class="tool-title">
+					نمایش حاشیه
+				</div>
+				<div class="tool-body">
+					<label class="form-switch">
+						<input id="bcbenable" type="checkbox">
+						<i></i>
+					</label>
+				</div>
+			</div>
+			<div class="toolbar-tool barcode-border-size" data-change-function="toggleBarcodeContainerBorderSize">
+				<div class="tool-title">
+					اندازه حاشیه (mm)
+				</div>
+				<div class="tool-body">
+					<div class="number-input">
+						<button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+							class="minus">-</button>
+						<input id="bcbsize" min="0.5" step="0.5" max="5" value="0.5" type="number">
+						<button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+							class="plus">+</button>
+					</div>
+				</div>
+			</div>
+			<div class="toolbar-tool barcode-border-type" data-change-function="toggleBarcodeContainerBorderType">
+				<div class="tool-title">
+					نوع حاشیه
+				</div>
+				<div class="tool-body">
+					<select id="barcode-border-type-list">
+						<option value="solid" selected="selected">Simple</option>
+						<option value="dashed">dashed</option>
+						<option value="dotted">Dotted</option>
+						<option value="double">Double</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="toolbar-tool barcode-width">
+				<div class="tool-title">
+					عرض رول (mm)
+				</div>
+				<div class="tool-body">
+					<div class="number-input">
+						<button disabled class="minus">-</button>
+						<input id="bwprinter" min="1" readonly type="number">
+						<button disabled class="plus">+</button>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div>
+
+		</div>
+	</div>
+
+	<div id="printarea" class="printarea center">
+
+		<img class="code128" />
+
+		<div class="inner qr">
+
+			<div id="qrcodecontainer" class="qrcnt">
+			</div>
+		</div>
+
+		<div class="inner" style="padding-top:5px">
+			<strong>
+				<span id="shelf_number"></span>
+			</strong>
+		</div>
+
+	</div>
+	<input type="hidden" id="statusId" name="statusId" value="0">
+	<script type="text/javascript">
+
+		window.toolsFunction = {
+			'changeBarcodeCount': function () {
+				if (typeof window.rppbarcodeoptions === "undefined")
+					return;
+				if (jQuery('.barcode-count input').val() == 0)
+					return;
+				if (jQuery('.barcode-count input').val() > 1000)
+					return;
+
+				window.rppbarcodeoptions.bcount = parseInt(jQuery('.barcode-count input').val());
+				renderBarcodes();
+				setBarcodeWrapperStyle();
+				showChilderen();
+			},
+			'changeBarcodePrintTopOffset': function () {
+				if (typeof window.rppbarcodeoptions === "undefined")
+					return;
+				if (jQuery('.barcode-continer-top-offset input').val() < 0)
+					return;
+
+				window.rppbarcodeoptions.bcto = parseInt(jQuery('.barcode-continer-top-offset input').val());
+				setBarcodeWrapperStyle();
+
+			},
+			//تعداد ستون
+			'changeBarcodeColumns': function () {
+				if (typeof window.rppbarcodeoptions === "undefined")
+					return;
+				if (jQuery('.barcode-columns input').val() == 0)
+					return;
+				if (jQuery('.barcode-columns input').val() > 15)
+					return;
+
+				window.rppbarcodeoptions.bcols = parseInt(jQuery('.barcode-columns input').val());
+
+				setBarcodeWrapperStyle();
+			},
+
+			'changeBarcodeContainerColumnGap': function () {
+				if (typeof window.rppbarcodeoptions === "undefined")
+					return;
+				if (jQuery('.barcode-container-column-gap input').val() < 0)
+					return;
+				if (jQuery('.barcode-container-column-gap input').val() > 50)
+					return;
+
+				window.rppbarcodeoptions.bccg = parseInt(jQuery('.barcode-container-column-gap input').val());
+				setBarcodeWrapperStyle();
+			},
+			'changeBarcodeContainerRowGap': function () {
+				if (typeof window.rppbarcodeoptions === "undefined")
+					return;
+				if (jQuery('.barcode-container-row-gap input').val() < 0)
+					return;
+				if (jQuery('.barcode-container-row-gap input').val() > 50)
+					return;
+
+				window.rppbarcodeoptions.bcrg = parseInt(jQuery('.barcode-container-row-gap input').val());
+				setBarcodeWrapperStyle();
+			},
+			'changeBarcodeContainerWidth': function () {
+				if (typeof window.rppbarcodeoptions === "undefined")
+					return;
+				window.rppbarcodeoptions.bcw = parseInt(jQuery('.barcode-continer-width input').val());
+				setBarcodeContainerStyle();
+				setBarcodeWrapperStyle();
+			},
+			'changeBarcodeContainerHeight': function () {
+				if (typeof window.rppbarcodeoptions === "undefined")
+					return;
+				window.rppbarcodeoptions.bch = parseInt(jQuery('.barcode-continer-height input').val());
+				setBarcodeContainerStyle();
+				setBarcodeWrapperStyle();
+			},
+			'changeBarcodeWidth': function () {
+				if (typeof window.rppbarcodeoptions === "undefined")
+					return;
+				window.rppbarcodeoptions.bw = parseInt(jQuery('.barcode-width input').val());
+				setBarcodeStyle();
+			},
+			'changeBarcodeHeight': function () {
+				if (typeof window.rppbarcodeoptions === "undefined")
+					return;
+				window.rppbarcodeoptions.bh = parseInt(jQuery('.barcode-height input').val());
+				setBarcodeStyle();
+			},
+			'toggleBarcodeContainerBorder': function () {
+				if (typeof window.rppbarcodeoptions === "undefined")
+					return;
+				var isChecked = jQuery('.barcode-border .form-switch input').is(':checked');
+				if (isChecked)
+					window.rppbarcodeoptions.bcbenable = 1;
+				else
+					window.rppbarcodeoptions.bcbenable = 0;
+
+				setBarcodeContainerStyle();
+			},
+			'toggleBarcodeContainerBorderSize': function () {
+				if (typeof window.rppbarcodeoptions === "undefined")
+					return;
+
+				if (jQuery('.barcode-column input').val() == 0.5)
+					return;
+				if (jQuery('.barcode-column input').val() > 5)
+					return;
+
+				window.rppbarcodeoptions.bcbsize = parseFloat(jQuery('.barcode-border-size input').val());
+
+				if (!window.rppbarcodeoptions.bcbenable)
+					return;
+				setBarcodeContainerStyle();
+				setBarcodeWrapperStyle();
+			},
+
+			'toggleBarcodeContainerBorderType': function () {
+				if (typeof window.rppbarcodeoptions === "undefined")
+					return;
+				window.rppbarcodeoptions.bcbtype = jQuery('.barcode-border-type select').val();
+				if (!window.rppbarcodeoptions.bcbenable)
+					return;
+				setBarcodeContainerStyle();
+			},
+
+			'saveBorderSettings': function () {
+				if (typeof window.rppbarcodeoptions === "undefined")
+					return;
+
+				if (jQuery('.savesettingloader').length > 0)
+					return;
+
+				console.clear();
+
+				if (typeof window.rppbarcodeoptions === "undefined")
+					return;
+
+				console.clear();
+
+				//need update
+				var params = {
+
+					address: window.rppbarcodeoptions.address,
+
+					bcount: window.rppbarcodeoptions.bcount,
+
+					bcols: window.rppbarcodeoptions.bcols,
+
+					bw: window.rppbarcodeoptions.bw,
+
+					bh: window.rppbarcodeoptions.bh,
+
+					bcto: window.rppbarcodeoptions.bcto,
+
+					bcw: window.rppbarcodeoptions.bcw,
+
+					bch: window.rppbarcodeoptions.bch,
+
+					bccg: window.rppbarcodeoptions.bccg,
+
+					bcrg: window.rppbarcodeoptions.bcrg,
+
+					bcbenable: window.rppbarcodeoptions.bcbenable,
+
+					bcbsize: window.rppbarcodeoptions.bcbsize,
+
+					bcbtype: window.rppbarcodeoptions.bcbtype,
+
+					bcbcolor: window.rppbarcodeoptions.bcbcolor,
+
+					bcbside: window.rppbarcodeoptions.bcbside,
+
+					type: window.rppbarcodeoptions.type,
+
+					token: window.rppbarcodeoptions.token,
+
+					user_id: window.rppbarcodeoptions.user_id,
+
+					creator: window.rppbarcodeoptions.creator,
+
+					id: window.rppbarcodeoptions.id
+				};
+
+				jQuery.ajax({
+					type: "POST",
+					url: "https://server.finty.ir/new_address",
+					data: params,
+					success: function (data, textStatus, jqXHR) {
+						if (data.status == 1) {
+
+							alert('تنظیمات مورد نظر ذخیره شد');
+
+							if (window.rppbarcodeoptions.address == "6414") {
+
+								window.rppbarcodeoptions.id = data.id;
+
+								window.rppbarcodeoptions.address = "6415";
+							}
+						}
+
+						else {
+
+							alert('مشکلی در هنگام ذخیره تنظیمات بوجود آمد');
+
+							jQuery('.savesettingloader').remove();
+						}
+					},
+					error: function (jqXHR, textStatus, errorThrown) {
+
+						alert('مشکلی در هنگام ذخیره تنظیمات بوجود آمد');
+						jQuery('.savesettingloader').remove();
+					},
+					dataType: 'json'
+				});
+			},
+		}
+
+		jQuery(document).ready(function () {
+
+			$("#btn_print").click(function () {
+				window.print();
+			});
+
+			var shelf_number=getParameterByName("bottomtext");
+         
+         	if(shelf_number)
+         	{
+         		$('#shelf_number').text(" قفسه "+shelf_number);
+         	}
+
+
+			$('#txtvalue').on('input', function (e) {
+
+				renderBarcodes();
+
+				genqrcode();
+
+			});
+
+			console.clear();
+
+			var isIOS = (function () {
+				var iosQuirkPresent = function () {
+					var audio = new Audio();
+
+					audio.volume = 0.5;
+					return audio.volume === 1;   // volume cannot be changed from "1" on iOS 12 and below
+				};
+
+				var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+				var isAppleDevice = navigator.userAgent.includes('Macintosh');
+				var isTouchScreen = navigator.maxTouchPoints >= 1;   // true for iOS 13 (and hopefully beyond)
+
+				return isIOS || (isAppleDevice && (isTouchScreen || iosQuirkPresent()));
+			})();
+
+			if (isIOS == true) {
+				$('#barcodetools').css('overflow-y', 'scroll');
+			}
+
+			var q_id = getParameterByName("id");
+
+			var type = getParameterByName("type");
+
+			var user_id = getParameterByName("userId");
+
+			var creator = getParameterByName("creator");
+
+			var token = getParameterByName("token");
+
+			var link = 'https://my.finty.ir/tracking/' + q_id + '/' + token;
+
+			if (isUrlValid(link)) {
+				$('#txtvalue').val(link);
+			}
+
+			window.rppbarcodeoptions = jQuery.parseJSON('{"address":"6414", "bcount":1,"bcols":1,"bw":25,"bh":25,"bcto":0,"bcw":42,"bch":45,"bccg":0,"bcrg":0,"bcbenable":0,"bcbsize":0.5,"bcbtype":"solid","bcbcolor":"#000000","bcbside":"in","type":"1","token":"token","user_id":1,"creator":1,"id":0}');
+
+			window.rppbarcodeoptions.user_id = user_id;
+
+			if (creator) {
+				window.rppbarcodeoptions.creator = parseInt(creator);
+			}
+
+			window.rppbarcodeoptions.token = token;
+
+			window.rppbarcodeoptions.type = type;
+
+			var id = getParameterByName("id");
+
+			var value = (id).toString();
+
+			localStorage.setItem("value", value);
+
+			//JsBarcode(".code128", value, { format: "code128", height: window.rppbarcodeoptions.bh, displayValue: false, margin: 0, width: window.rppbarcodeoptions.bw });
+
+			renderBarcodes();
+
+			setBarcodeWrapperStyle();
+
+			//read  params from db
+			var params = { address: 6417, creator: creator, type: type };
+
+			var url = "https://server.finty.ir/new_address";
+
+			$.post(url, params, function (rData) {
+				if ((rData.status == 1) && (rData.num > 0)) {
+					var base = rData.result[0];
+
+					$('#statusId').val("1");
+
+					window.rppbarcodeoptions.address = "6415";
+
+					window.rppbarcodeoptions.id = base.bc_id;
+
+					//تعداد بارکد
+					window.rppbarcodeoptions.bcount = base.bc_bcount;
+
+					//update ui
+					$('#bcount').val(base.bc_bcount);
+
+					renderBarcodes();
+
+					setBarcodeWrapperStyle();
+
+					// فاصله چاپ از بالا (میلیمتر) 
+					window.rppbarcodeoptions.bcto = base.bc_bcto;
+
+					$('#bcto').val(base.bc_bcto);
+
+					setBarcodeWrapperStyle();
+
+
+					// تعداد ستون
+					window.rppbarcodeoptions.bcols = base.bc_bcols;
+
+					$('#bcols').val(base.bc_bcols);
+
+					setBarcodeWrapperStyle();
+
+
+					//فاصله ستون ها
+					window.rppbarcodeoptions.bccg = base.bc_bccg;
+
+					$('#bccg').val(base.bc_bccg);
+
+					setBarcodeWrapperStyle();
+
+
+					//فاصله ردیف ها
+					window.rppbarcodeoptions.bcrg = base.bc_bcrg;
+
+					$('#bcrg').val(base.bc_bcrg);
+
+					setBarcodeWrapperStyle();
+
+
+					//عرض برچسب
+					window.rppbarcodeoptions.bcw = base.bc_bcw;
+
+					$('#bcw').val(base.bc_bcw);
+
+					setBarcodeContainerStyle();
+
+					setBarcodeWrapperStyle();
+
+
+					//ارتفاع برچسب   
+					window.rppbarcodeoptions.bch = base.bc_bch;
+
+					$('#bch').val(base.bc_bch);
+
+					setBarcodeContainerStyle();
+
+					setBarcodeWrapperStyle();
+
+
+					//عرض بارکد
+					window.rppbarcodeoptions.bw = base.bc_bw;
+
+					$('#bw').val(base.bc_bw);
+
+					setBarcodeStyle();
+
+
+					//ارتفاع بارکد
+					window.rppbarcodeoptions.bh = base.bc_bh;
+
+					$('#bh').val(base.bc_bh);
+
+					setBarcodeStyle();
+
+					var enable = parseInt(base.bc_bcbenable);
+
+					//نمایش حاشیه 
+					if (enable == 1) {
+						window.rppbarcodeoptions.bcbenable = 1;
+
+						$('#bcbenable').prop("checked", true);
+
+					}
+					else {
+						window.rppbarcodeoptions.bcbenable = 0;
+
+						$('#bcbenable').prop("checked", false);
+					}
+
+					//سایز حاشیه
+					window.rppbarcodeoptions.bcbsize = base.bc_bcbsize;
+
+					$('#bcbsize').val(base.bc_bcbsize);
+
+					$('#bcenable').val(base.bc_bcbsize);
+
+					setBarcodeContainerStyle();
+
+					setBarcodeWrapperStyle();
+
+					//نوع حاشیه
+
+					switch (base.bc_bcbtype) {
+						case "solid":
+
+							window.rppbarcodeoptions.bcbtype = "solid";
+
+							break;
+
+						case "dashed":
+
+							window.rppbarcodeoptions.bcbtype = "dashed"
+
+							break;
+
+						case "dotted":
+
+							window.rppbarcodeoptions.bcbtype = "dotted";
+
+							break;
+
+						case "double":
+
+							window.rppbarcodeoptions.bcbtype = "double";
+
+							break;
+
+						default:
+
+							window.rppbarcodeoptions.bcbtype = "solid";
+					}
+
+					$("select#barcode-border-type-list").val(window.rppbarcodeoptions.bcbtype);
+
+					window.rppbarcodeoptions.bcbcolor = "#000000";
+
+					window.rppbarcodeoptions.bcbside = "in";
+
+					setBarcodeContainerStyle();
+
+				}
+
+			})
+				.fail(function () {
+					console.log("error ----");
+				});
+
+			UpdatePrinterRoll();
+
+			//number inputs select text on click and focus
+			jQuery('.number-input input').focus(function () {
+				jQuery(this).select();
+			});
+
+			//number inputs + and - click action, ios switch toggle action, buttons click action
+			jQuery('.number-input button.minus, .number-input button.plus, .form-switch, .toolbar-tool .tool-body button').click(function (e) {
+				if (typeof window.toolsFunction === "undefined")
+					return;
+				var f = jQuery(this).parents('.toolbar-tool').data('change-function');
+				if (typeof window.toolsFunction[f] === "undefined")
+					return;
+				window.toolsFunction[f]();
+			});
+
+			//number inputs keyboard input action
+			jQuery('.number-input input').keyup(function (e) {
+				if (typeof window.toolsFunction === "undefined")
+					return;
+				var f = jQuery(this).parents('.toolbar-tool').data('change-function');
+				if (typeof window.toolsFunction[f] === "undefined")
+					return;
+				window.toolsFunction[f]();
+			});
+
+			//select input change action
+			jQuery('.toolbar-tool .tool-body select').change(function (e) {
+				if (typeof window.toolsFunction === "undefined")
+					return;
+				var f = jQuery(this).parents('.toolbar-tool').data('change-function');
+				if (typeof window.toolsFunction[f] === "undefined")
+					return;
+				window.toolsFunction[f]();
+			});
+
+			jQuery('.barcode-toolbar-toogle').click(function (e) {
+				jQuery('body').toggleClass('toolbar-active');
+			});
+
+			genqrcode();
+		});
+
+		function showChilderen() {
+			$('div.inner').each(function (i, obj) {
+				$(this).show();
+			});
+		}
+
+		function setBarcodeWrapperStyle() {
+			if (typeof window.rppbarcodeoptions === "undefined")
+				return;
+
+			var cwidth = (window.rppbarcodeoptions.bcols * window.rppbarcodeoptions.bcw) + ((window.rppbarcodeoptions.bcols - 1) * window.rppbarcodeoptions.bccg);
+
+			if (window.rppbarcodeoptions.bcbenable && window.rppbarcodeoptions.bcbside == "out")
+				cwidth += (window.rppbarcodeoptions.bcbsize * window.rppbarcodeoptions.bcols * 2);
+
+			jQuery('.printarea').css({
+				width: cwidth + "mm",
+				margin: window.rppbarcodeoptions.bcto + 'mm auto 0',
+				gap: window.rppbarcodeoptions.bcrg + 'mm ' + window.rppbarcodeoptions.bccg + 'mm',
+			});
+
+			UpdatePrinterRoll();
+		}
+
+		function setBarcodeContainerStyle() {
+			if (typeof window.rppbarcodeoptions === "undefined")
+				return;
+			var styleString = " width: " + window.rppbarcodeoptions.bcw + "mm;"
+				+ " height: " + window.rppbarcodeoptions.bch + "mm;";
+			if (window.rppbarcodeoptions.bcbenable)
+				styleString += " border: " + window.rppbarcodeoptions.bcbsize + "mm " + window.rppbarcodeoptions.bcbtype + " " + window.rppbarcodeoptions.bcbcolor + ";";
+			if (window.rppbarcodeoptions.bcbenable && window.rppbarcodeoptions.bcbside == "in")
+				styleString += " box-sizing: border-box;";
+
+			jQuery('.printarea > *').attr("style", styleString);
+
+			UpdatePrinterRoll();
+		}
+
+		function setBarcodeStyle() {
+			if (typeof window.rppbarcodeoptions === "undefined")
+				return;
+
+			var value = localStorage.getItem("value");
+
+			Reset();
+
+			//var value = localStorage.getItem("value");
+
+			//var canvas = document.createElement("canvas");
+
+			//JsBarcode(canvas, value, { format: "code128", height: window.rppbarcodeoptions.bh, displayValue: false, margin: 0, width: window.rppbarcodeoptions.bw });
+
+			//var src = canvas.toDataURL("image/png");
+
+			//$('.code128').attr("src", src);
+
+			UpdatePrinterRoll();
+
+			genqrcode();
+		}
+
+		function removeAttr(classname, attr) {
+			document.querySelectorAll(classname).forEach(el => el.removeAttribute(attr));
+		}
+
+		function renderBarcodes() {
+			if (typeof window.rppbarcodeoptions === "undefined")
+				return;
+
+			var barcodeHtml = jQuery('.printarea > *').first()[0].outerHTML;
+			jQuery('.printarea').html("");
+
+
+			for (var i = 0; i < window.rppbarcodeoptions.bcount; i++) {
+				jQuery('.printarea').append(barcodeHtml);
+			}
+
+			UpdatePrinterRoll();
+
+			genqrcode();
+		}
+
+		function getParameterByName(name) {
+			var regexS = "[\\?&]" + name + "=([^&#]*)",
+				regex = new RegExp(regexS),
+				results = regex.exec(window.location.search);
+			if (results == null) {
+				return "";
+			} else {
+				return decodeURIComponent(results[1].replace(/\+/g, " "));
+			}
+		}
+
+		function UpdatePrinterRoll() {
+
+			var element = document.querySelector('#printarea');
+
+			var width = element.style.width.replace('mm', '');
+
+			document.querySelector('#bwprinter').value = width;
+		}
+
+		function genqrcode() {
+
+
+			var width = $('#bw').val() * 5;
+
+			var height = $('#bh').val() * 5;
+
+			$('#qrcodecontainer').empty();
+
+			var value = $('#txtvalue').val();
+
+			if (isUrlValid(value)) {
+				var qrcode = new QRCode('qrcodecontainer', {
+					text: value,
+					width: width,
+					height: height,
+					colorDark: "#000000",
+					colorLight: "#ffffff",
+					correctLevel: QRCode.CorrectLevel.H
+				});
+			}
+		}
+
+
+
+		function isUrlValid(url) {
+			return /^(https?|s?ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(url);
+		}
+
+
+		function Reset() {
+
+			document.querySelectorAll(".code128").forEach(el => el.innerHTML = '');
+
+			removeAttr(".code128", "width");
+
+			removeAttr(".code128", "height");
+
+			removeAttr(".code128", "x");
+
+			removeAttr(".code128", "y");
+
+			removeAttr(".code128", "viewBox");
+
+			removeAttr(".code128", "version");
+
+			removeAttr(".code128", "xmlns");
+
+			removeAttr(".code128", "style");
+		}
+	</script>
+
+
+</body>
+
+</html>
