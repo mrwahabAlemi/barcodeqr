@@ -33,17 +33,12 @@
 					<div class="btn-wrapper" id="toolbar-save">
 						<button class="btn btn-small button-apply btn-success"> <span class="icon-apply icon-white"
 								aria-hidden="true"></span>ذخیره</button>
+								<button id="btn_print" class="btn btn-meduim button-apply btn-info"> <span
+									class="icon-print icon-white" aria-hidden="true"></span>چاپ</button>
 					</div>
 				</div>
 			</div>
-			<div class="toolbar-tool">
-				<div class="tool-body">
-					<div class="btn-wrapper" id="toolbar-save">
-						<button id="btn_print" class="btn btn-meduim button-apply btn-info"> <span
-								class="icon-print icon-white" aria-hidden="true"></span>چاپ</button>
-					</div>
-				</div>
-			</div>
+
 			<div class="toolbar-tool barcode-count" data-change-function="changeBarcodeCount">
 				<div class="tool-title">
 					تعداد کیوآرکد
@@ -64,9 +59,11 @@
 				</div>
 				<div class="tool-body">
 					<div class="number-input">
-						<button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus">-</button>
+						<button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+							class="minus">-</button>
 						<input id="fncount" min="10" max="35" value="1" type="number">
-						<button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus">+</button>
+						<button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+							class="plus">+</button>
 					</div>
 				</div>
 			</div>
@@ -254,7 +251,7 @@
 
 		<div class="bparent">
 
-			<div class="inner qr">
+			<div class="inner">
 
 				<img class="code128" />
 				<div id="qrcodecontainer" class="qrcnt">
@@ -263,7 +260,7 @@
 
 			<div class="inner" style="padding-top:5px">
 				<strong>
-			      <span id="shelf_number"></span>
+					<span id="shelf_number" class="shnumbers" ></span>
 				</strong>
 
 			</div>
@@ -291,16 +288,7 @@
 				if (typeof window.rppbarcodeoptions === "undefined")
 					return;
 
-					var font_size=$('#fncount').val();
-
-				if (font_size == 0)
-					return;
-				if (font_size > 35)
-					return;
-					
-				var value=font_size+'px';
-
-			    $('#shelf_number').css('font-size',value);
+			  ChangeFont_size();
 
 			},
 			'changeBarcodePrintTopOffset': function () {
@@ -509,6 +497,8 @@
 			$("#btn_print").click(function () {
 				window.print();
 			});
+
+			ChangeFont_size();
 
 			$('#txtlink').on('input', function (e) {
 
@@ -853,6 +843,19 @@
 			document.querySelectorAll(classname).forEach(el => el.removeAttribute(attr));
 		}
 
+		function ChangeFont_size() {
+			var font_size = $('#fncount').val();
+
+			if (font_size == 0)
+				return;
+			if (font_size > 35)
+				return;
+
+			var value = font_size + 'px';
+
+			$('.shnumbers').css('font-size', value);
+		}
+
 		function renderBarcodes() {
 			if (typeof window.rppbarcodeoptions === "undefined")
 				return;
@@ -892,14 +895,12 @@
 
 		function genqrcode() {
 
-			var shelf_number=getParameterByName("bottomtext");
+			var shelf_number = getParameterByName("bottomtext");
 
-			if(shelf_number)
-			{
+			if (shelf_number) {
 				$('#shelf_number').text(shelf_number);
 			}
-			else
-			{
+			else {
 				$('#shelf_number').text("----------");
 			}
 
