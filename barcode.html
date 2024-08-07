@@ -251,7 +251,7 @@
 
 			<div class="inner" style="padding-top:5px">
 				<strong>
-			      <span id="user_title"></span>
+			      <span id="shelf_number"></span>
 				</strong>
 
 			</div>
@@ -864,15 +864,15 @@
 
 		function genqrcode() {
 
-			var user_title=getParameterByName("toptext");
+			var shelf_number=getParameterByName("bottomtext");
 
-			if(user_title)
+			if(shelf_number)
 			{
-				$('#user_title').text(user_title);
+				$('#shelf_number').text(shelf_number);
 			}
 			else
 			{
-				console.log("no title");
+				$('#shelf_number').text("----------");
 			}
 
 			var width = $('#bw').val() * 5;
