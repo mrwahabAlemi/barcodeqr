@@ -58,6 +58,18 @@
 					</div>
 				</div>
 			</div>
+			<div class="toolbar-tool barcode-font" data-change-function="changefontsize">
+				<div class="tool-title">
+					سایز فونت متن
+				</div>
+				<div class="tool-body">
+					<div class="number-input">
+						<button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus">-</button>
+						<input id="fncount" min="10" max="35" value="1" type="number">
+						<button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus">+</button>
+					</div>
+				</div>
+			</div>
 			<div class="toolbar-tool barcode-continer-top-offset" data-change-function="changeBarcodePrintTopOffset">
 				<div class="tool-title">
 					فاصله از بالا در هنگام چاپ (mm)
@@ -274,6 +286,22 @@
 				renderBarcodes();
 				setBarcodeWrapperStyle();
 				showChilderen();
+			},
+			'changefontsize': function () {
+				if (typeof window.rppbarcodeoptions === "undefined")
+					return;
+
+					var font_size=$('#fncount').val();
+
+				if (font_size == 0)
+					return;
+				if (font_size > 35)
+					return;
+					
+				var value=font_size+'px';
+
+			    $('#shelf_number').css('font-size',value);
+
 			},
 			'changeBarcodePrintTopOffset': function () {
 				if (typeof window.rppbarcodeoptions === "undefined")
