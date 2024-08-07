@@ -34,7 +34,26 @@
 			direction: ltr;
 			text-align: left;
 	    }
+	
+		.radio-button {
+		  width:45%;
+		  text-align: right;
+		  display: inline-block;
+		}
+		.radio-button input[type="radio"] {
+		  margin: 0 10px 0 0;
+		}
+		.radio-button label {
+	
+		  color: #333;
+		  float: inline-start;
+		}
+		.radio-button input[type="radio"]:checked + label {
+		  color: #00698f;
+		}
 
+	  
+	
 	    @media print {
 	    	@page {
 	    		/*size: 1.77in 0.59in;*/
